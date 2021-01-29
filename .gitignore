@@ -81,6 +81,9 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 # Ignore dependencies
 /wp-content/themes/working-group-two/node_modules
 
+# Ignore Parcel caching and watching
+/wp-content/themes/working-group-two/.cache/*
+/wp-content/themes/working-group-two/dist/*
 
 # large/disallowed file types
 # a CDN should be used for these
