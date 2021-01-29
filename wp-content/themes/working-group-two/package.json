@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel watch src/index.js scss/main.scss --out-dir dist/"
+    "dev": "parcel watch src/index.js scss/main.scss --out-dir dist/",
+    "build": "parcel build src/index.js scss/main.scss --out-dir dist/"
   },
   "keywords": [],
   "author": "",
