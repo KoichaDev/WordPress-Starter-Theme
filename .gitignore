@@ -76,6 +76,7 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 /wp-content/themes/index.php
 /wp-content/plugins/index.php
 /wp-content/plugins/akismet*
+!/wp-content/themes/workinggrouptwo
 
 # large/disallowed file types
 # a CDN should be used for these
