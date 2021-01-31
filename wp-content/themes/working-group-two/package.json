@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "debugfalse": "node src/js/dev_modules/wp-debug-false.js ",
+    "debugtrue": "node src/js/dev_modules/wp-debug-true.js ",
     "browsersync": "browser-sync start --proxy 'http://dummy.local' --files '**/*.php'",
-    "parcel": "parcel watch src/index.js scss/main.scss --out-dir dist/",
+    "parcel": "npm run debugtrue && parcel watch src/index.js scss/main.scss --out-dir dist/",
     "dev": "concurrently --kill-others \"npm run browsersync\" \"npm run parcel\"",
-    "prod": "parcel build src/index.js scss/main.scss --out-dir dist/"
+    "prod": "npm run debugfalse && parcel build src/index.js scss/main.scss --out-dir dist/"
   },
   "keywords": [],
   "author": "",
