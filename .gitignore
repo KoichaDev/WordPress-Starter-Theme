@@ -79,6 +79,10 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 /wp-content/plugins/akismet*
 !/wp-content/themes/working-group-two
 
+# Ignore plugins
+/wp-content/plugins
+/wp-content/plugins/*
+
 # Ignore dependencies
 /wp-content/themes/working-group-two/node_modules
 
