@@ -23,7 +23,7 @@ wp-content/cache/supercache/*
 .gitattributes
 _wpeprivate*
 wp-content/object-cache.php
-wp-content/mu-plugins/mu-plugin.php
+wp-content/mu-plugins/mu-plugin.
 wp-content/mu-plugins/slt-force-strong-passwords.php
 wp-content/mu-plugins/stop-long-comments.php
 wp-content/mu-plugins/force-strong-passwords*
@@ -77,20 +77,20 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 /wp-content/themes/index.php
 /wp-content/plugins/index.php
 /wp-content/plugins/akismet*
-!/wp-content/themes/working-group-two
+!/wp-content/themes/_theme_name
 
 # Ignore plugins
 /wp-content/plugins
 /wp-content/plugins/*
 
 # Ignore dependencies
-/wp-content/themes/working-group-two/node_modules
+/wp-content/themes/_theme_name/node_modules
 
 # Ignore Parcel caching and watching
-/wp-content/themes/working-group-two/.cache
-/wp-content/themes/working-group-two/.cache/*
-/wp-content/themes/working-group-two/dist
-/wp-content/themes/working-group-two/dist/*
+/wp-content/themes/_theme_name/.cache
+/wp-content/themes/_theme_name/.cache/*
+/wp-content/themes/_theme_name/dist
+/wp-content/themes/_theme_name/dist/*
 
 # large/disallowed file types
 # a CDN should be used for these
