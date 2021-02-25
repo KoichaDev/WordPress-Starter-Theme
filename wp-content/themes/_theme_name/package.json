@@ -6,7 +6,7 @@
   "scripts": {
     "debugfalse": "node src/js/dev_modules/wp-debug-false.js ",
     "debugtrue": "node src/js/dev_modules/wp-debug-true.js ",
-    "browsersync": "browser-sync start --proxy 'http://working-group-two.local/' --files '**/*.php'",
+    "browsersync": "browser-sync start --proxy 'http://wordpress-starter-theme.local/' --files '**/*.php'",
     "parcel": "npm run debugtrue && parcel watch src/index.js scss/main.scss --public-url ./ --out-dir dist/",
     "dev": "concurrently --kill-others \"npm run browsersync\" \"npm run parcel\"",
     "prod": "npm run debugfalse && parcel build src/index.js scss/main.scss --public-url ./ --out-dir dist/"
