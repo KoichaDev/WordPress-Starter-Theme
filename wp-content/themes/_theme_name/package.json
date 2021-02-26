@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
+    "update-git-tag-version": "node src/js/dev_modules/git-semver-tags/git-semver-tags.js",
     "rename-php-css-version": "node src/js/dev_modules/replace-in-all-filename/replace-in-php-css-version.js",
     "rename-php-handle": "node src/js/dev_modules/replace-in-all-filename/replace-in-php-handle.js",
     "rename-style-css-theme-name": "node src/js/dev_modules/replace-in-all-filename/replace-in-style-css-theme-name.js",
     "rename-style-css-version": "node src/js/dev_modules/replace-in-all-filename/replace-in-style-css-version.js",
-    "rename": "concurrently \"npm run rename-php-css-version\" \"npm run rename-php-handle\" \"npm run rename-style-css-theme-name\" \"npm run rename-style-css-version\"",
+    "rename": "concurrently \"npm run update-git-tag-version\" \"npm run rename-php-css-version\" \"npm run rename-php-handle\" \"npm run rename-style-css-theme-name\" \"npm run rename-style-css-version\"",
     "debugfalse": "node src/js/dev_modules/wp-debug-false.js ",
     "debugtrue": "node src/js/dev_modules/wp-debug-true.js ",
     "compress:img": "node compress-images.config.js && node src/js/dev_modules/move-img.js",
@@ -38,9 +39,13 @@
   "dependencies": {
     "concurrently": "^5.3.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "core-js-builder": "^3.9.1",
     "gifsicle": "^5.2.0"
 =======
+=======
+    "git-semver-tags": "^4.1.1",
+>>>>>>> 1fc4379 (Add: 📦 git-semver-tags for replacing package.json version value)
     "replace-in-file": "^6.2.0"
 >>>>>>> 6c8e3ef (Add: ✨ Creating a Replaceable Placeholder Prefix for _theme_name)
   },
