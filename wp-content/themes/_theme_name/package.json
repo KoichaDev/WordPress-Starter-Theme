@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "debugfalse": "node src/js/dev_modules/wp-debug-false.js ",
     "debugtrue": "node src/js/dev_modules/wp-debug-true.js ",
     "browsersync": "browser-sync start --proxy 'http://wordpress-starter-theme.local/' --files '**/*.php'",
@@ -11,20 +12,25 @@
     "dev": "concurrently --kill-others \"npm run browsersync\" \"npm run parcel\"",
     "prod": "npm run debugfalse && parcel build src/index.js scss/main.scss --public-url ./ --out-dir dist/"
   },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-syntax-async-generators": "^7.8.4",
     "@wordpress/browserslist-config": "^3.0.0",
-    "browserslist": "^4.16.1",
     "browser-sync": "^2.26.14",
+    "browserslist": "^4.16.1",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-clean-dist": "0.0.6",
     "parcel-plugin-purgecss": "^3.0.0",
     "sass": "^1.32.5"
   },
   "dependencies": {
-    "concurrently": "^5.3.0"
+    "concurrently": "^5.3.0",
+    "core-js-builder": "^3.9.1"
   },
   "browserslist": [
     "extends @wordpress/browserslist-config"

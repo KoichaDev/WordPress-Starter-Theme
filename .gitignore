@@ -80,7 +80,7 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 !/wp-content/themes/_theme_name
 
 # Ignore plugins
-/wp-content/plugins
+/wp-content/plugins/
 /wp-content/plugins/*
 
 # Ignore dependencies
