@@ -80,10 +80,13 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 !/wp-content/themes/_theme_name
 
 # Ignore plugins
-/wp-content/plugins/
 /wp-content/plugins/*
 
-# Ignore dependencies
+# Don't ignore specific plugin(s)
+!/wp-content/plugins/wpc-cli
+
+# Ignore dependencies and vendors
+/wp-content/plugins/wpc-cli/vendor
 /wp-content/themes/_theme_name/node_modules
 
 # Ignore Parcel caching and watching
