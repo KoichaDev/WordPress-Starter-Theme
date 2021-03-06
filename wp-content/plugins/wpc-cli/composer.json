@@ -1,0 +1,12 @@
+{
+    "name": "khoi/wpc-cli",
+    "authors": [
+        {
+            "name": "Khoi Hoang",
+            "email": "khoii87@gmail.com"
+        }
+    ],
+    "require": {
+        "fzaninotto/faker": "^1.5"
+    }
+}
