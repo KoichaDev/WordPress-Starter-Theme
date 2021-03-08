@@ -20,6 +20,5 @@ if( defined('WP_CLI') && WP_CLI) {
     foreach ($folder_path as $file_name) {
         require $file_name;
     }
-
 }
 
