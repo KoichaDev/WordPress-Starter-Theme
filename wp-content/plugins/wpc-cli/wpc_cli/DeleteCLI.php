@@ -4,7 +4,6 @@ class DeleteCLI {
 
     public function posts($args, $assoc_args) {
         $amount = $assoc_args['amount'];
-        // wp_delete_post(309);
 
         $posts = get_posts([
             'post_type'     => 'post',
@@ -18,9 +17,6 @@ class DeleteCLI {
             $progress -> tick();
         }
 
-
-
-        
 
         $progress -> finish();
 
