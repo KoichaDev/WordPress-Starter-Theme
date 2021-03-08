@@ -1,6 +1,6 @@
 <?php
 
-class UpdateCLI {
+class UpdateData {
 
     public $progress; 
 
@@ -41,7 +41,7 @@ class UpdateCLI {
 
     public function untrash_all_posts($args, $assoc_args) {
 
-        $this -> progress = \WP_CLI\Utils\make_progress_bar( 'Updating...', $status );
+        $this -> progress = \WP_CLI\Utils\make_progress_bar( 'Trashing...', $status );
 
         if( post_type_exists( $assoc_args['post_type'] ) ) {
             $posts = get_posts([
@@ -76,4 +76,4 @@ class UpdateCLI {
     }
 }
 
-WP_CLI::add_command( 'update', 'UpdateCLI' );
+WP_CLI::add_command( 'update', 'UpdateData' );

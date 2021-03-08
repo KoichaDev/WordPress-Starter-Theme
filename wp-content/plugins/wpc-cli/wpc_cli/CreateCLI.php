@@ -1,13 +1,13 @@
 <?php
 
-class CreateCLI {
+class CreateData {
     public $post_id;
     public $post_title;
     public $post_content;
     public $post_excerpt;
 
     public function posts($args, $assoc_args) {
-        $amount = $assoc_args['amount'];
+        $amount = $assoc_args['total'];
 
         $home_type_terms = get_terms([
             'taxonomy'      => 'category',
@@ -62,5 +62,5 @@ class CreateCLI {
     }
 }
 
-WP_CLI::add_command('create', 'CreateCLI' );
+WP_CLI::add_command('create', 'CreateData' );
 
