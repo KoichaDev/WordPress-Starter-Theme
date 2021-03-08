@@ -6,8 +6,21 @@ class UpdateCLI {
 
     public function untrash_post($args, $assoc_args) {
         $id = $assoc_args['id'];
-        wp_untrash_post( $id );
-        WP_CLI::success('Post ID ' . $id  . ' successfully untrashed!');
+
+        switch (true) {
+            case $assoc_args['publish']:
+                wp_untrash_post( $id );
+                wp_publish_post( $id );
+                WP_CLI::success('Post ID ' . $id  . ' successfully published and untrashed!');
+                break;
+            case $assoc_args['draft']:
+                wp_untrash_post( $id );
+                WP_CLI::success('Post ID ' . $id  . ' successfully draft and untrashed!');
+                break;
+            default:
+                WP_CLI::error('Invalid argument!');
+                break;
+        }      
     }
 
     public function untrash_all_posts($args, $assoc_args) {
@@ -29,22 +42,22 @@ class UpdateCLI {
                     $this -> progress -> tick();
                 }
                 $this -> progress -> finish();
-                WP_CLI::success('Successfully published and untrashed the post(s)');
-            } else if(isset( $assoc_args['draft'])) {
+                WP_CLI::success( 'Successfully published and untrashed the post(s)' );
+            } else if( isset( $assoc_args['draft']) ) {
                 foreach ( $posts as $post ) {
                     wp_untrash_post( $post); // Set to False if you want to send them to Trash.   
                     $progress -> tick();
                 }
                 $this -> progress -> finish();
-                WP_CLI::success('Successfully drafted and untrashed the post(s)');
+                WP_CLI::success( 'Successfully drafted and untrashed the post(s)' );
             } else {
-                WP_CLI::error('Invalid argument. wp update --help to retrieve list');
+                WP_CLI::error( 'Invalid argument. wp update --help to retrieve list' );
             }
         } else {
-            WP_CLI::error('Post Type does not exist!');
+            WP_CLI::error( 'Post Type does not exist!' );
         }      
         add_action( 'trash_to_publish',  'untrash_all_posts', 10, 1 );
     }
 }
 
-WP_CLI::add_command('update', 'UpdateCLI' );
+WP_CLI::add_command( 'update', 'UpdateCLI' );
