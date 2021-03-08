@@ -2,25 +2,23 @@
 
 class DeleteCLI {
 
-    public function posts($args, $assoc_args) {
-        $amount = $assoc_args['amount'];
+    public function all_posts($args, $assoc_args) {
+            $progress = \WP_CLI\Utils\make_progress_bar( 'Updating...', $status );
 
         $posts = get_posts([
-            'post_type'     => 'post',
+            'post_type'     => $assoc_args['post_type'],
             'fields'        => 'ids',
-            'numberposts'   => -1,
+            'posts_per_page'   => -1,
         ]);
 
         foreach ($posts as $post) {
             setup_postdata( $post );
-            var_dump($post);
+            wp_delete_post($post, true);
             $progress -> tick();
         }
-
-
         $progress -> finish();
 
-        WP_CLI::success($amount . ' random posts generated!');
+        WP_CLI::success('All Post(s) deleted!');
     }
 }
 
