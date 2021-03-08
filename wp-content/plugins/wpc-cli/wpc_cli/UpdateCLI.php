@@ -11,14 +11,30 @@ class UpdateCLI {
             case $assoc_args['publish']:
                 wp_untrash_post( $id );
                 wp_publish_post( $id );
-                WP_CLI::success('Post ID ' . $id  . ' successfully published and untrashed!');
+                WP_CLI::line('Post ID: ' . $id);
+                WP_CLI::line('Post Title: ' . get_the_title( $id ));
+                WP_CLI::line('successfully published and untrashed!');
                 break;
             case $assoc_args['draft']:
                 wp_untrash_post( $id );
-                WP_CLI::success('Post ID ' . $id  . ' successfully draft and untrashed!');
+                WP_CLI::line('Post ID: ' . $id);
+                WP_CLI::line('Post Title: ' . get_the_title( $id ));
+                WP_CLI::line('successfully draft and untrashed!');
+                break;
+            case $assoc_args['info']:
+                WP_CLI::line('');
+                WP_CLI::line('DESCRIPTION:');
+                WP_CLI::line('  Manage untrash post WordPress command-line');
+                WP_CLI::line('');
+                WP_CLI::line('SYPNOSIS:');
+                WP_CLI::line('  wp update untrash_post');
+                WP_CLI::line('');
+                WP_CLI::line('PARAMETER:');
+                WP_CLI::line('  --id=<post_id> [--publish|--draft]');
                 break;
             default:
-                WP_CLI::error('Invalid argument!');
+                WP_CLI::error('Invalid argument!', false);
+                WP_CLI::line('For More info: wp untrash_post --info');
                 break;
         }      
     }
