@@ -2,10 +2,10 @@
 
 class UserRole {
     function __construct(){
-        $this -> initiate_hooks();
+        $this -> init_hooks();
     }
 
-    function initiate_hooks() {
+    function init_hooks() {
         global $current_user;
 
         // None administrator can't see newer general updates from WordPress
@@ -18,9 +18,14 @@ class UserRole {
             add_action( 'after_setup', [ $this, 'disable_none_admin_capabilities' ] );
         }
 
-        // Hide administrator account from the none administator user role
+        // Hide administrator account from the none administator user role table
         if( !function_exists( 'disable_none_admin_capabilities' ) ) {
             add_action('pre_user_query', [ $this, 'hide_user_role_administrator' ] );
+        }
+
+        // Hide administrator role from dropdown User list
+        if( !function_exists( 'hide_admin_user_role_dropdown_list')) {
+            add_action('admin_head',  [$this, 'hide_admin_user_role_dropdown_list'] );
         }
     }
 
@@ -72,7 +77,8 @@ class UserRole {
     }
 
     function hide_user_role_administrator($user_search) {
-        $username = $this ->$current_user -> user_login;
+        global $current_user;
+        $username = $current_user -> user_login;
         $current_user_role = $current_user -> roles[0];
 
         if ($current_user_role !== 'administrator') {
@@ -81,9 +87,31 @@ class UserRole {
             'WHERE 1=1',
             "WHERE 1=1 AND {$wpdb->users}.user_login != 'admin'",
             $user_search->query_where
-            );	
+            );    
         }
     }
+
+    function hide_admin_user_role_dropdown_list() {
+        global $current_user;
+
+        $admin_role = $current_user -> roles[0];
+
+        if ($admin_role !== 'administrator') {
+            echo '<style>
+            .administrator {
+                display: none !important;
+            }
+
+            option[value="administrator"] {
+                display: none !important;
+            } 
+            </style>';
+        } 
+    }
+}
+
+if ( ! defined( 'ABSPATH' ) ) {
+    die;
 }
 
 new UserRole();
