@@ -11,4 +11,3 @@ foreach ($folder_path as $file_name) {
 }
 
 
-

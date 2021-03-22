@@ -1,23 +1,26 @@
 <?php 
 
 class UserRole {
-    protected $function_name = [
-        'disable_none_admin_capabilities',
-        'disable_update_notification_none_admin_user',
-    ];
-
     function __construct(){
-        $this -> initiate_hooks($this -> function_name);
+        $this -> initiate_hooks();
     }
 
-    function initiate_hooks($callbacks = []) {
-        foreach ($callbacks as $key => $callback) { 
-            if( !function_exists( $callback ) ) {
-                // $this is is used to find the function outside of a class
-                add_action( 'init', [ $this, $callback ] );
-            } else {
-                add_action( 'after_setup', [ $this, $callback ] );
-            }
+    function initiate_hooks() {
+        global $current_user;
+
+        // None administrator can't see newer general updates from WordPress
+        if( !function_exists( 'disable_update_notification_none_admin_user' ) ) {
+            add_action( 'init', [ $this, 'disable_update_notification_none_admin_user' ] );
+        } 
+
+        // None Administrator have limited functionalities of WP capabilites 
+        if( !function_exists( 'disable_none_admin_capabilities' ) ) {
+            add_action( 'after_setup', [ $this, 'disable_none_admin_capabilities' ] );
+        }
+
+        // Hide administrator account from the none administator user role
+        if( !function_exists( 'disable_none_admin_capabilities' ) ) {
+            add_action('pre_user_query', [ $this, 'hide_user_role_administrator' ] );
         }
     }
 
@@ -50,9 +53,10 @@ class UserRole {
     }
 
     function disable_update_notification_none_admin_user() {
-            $admin_role = wp_get_current_user() -> roles[0];
+        
+        $admin_role = $this -> $current_user -> roles[0];
             
-            if( $admin_role !== 'administrator' ) {
+        if( $admin_role !== 'administrator' ) {
             // hide update notifications
             function remove_core_updates(){
                 global $wp_version;
@@ -64,6 +68,20 @@ class UserRole {
             add_filter('pre_site_transient_update_core','remove_core_updates'); //hide updates for WordPress itself
             add_filter('pre_site_transient_update_plugins','remove_core_updates'); //hide updates for all plugins
             add_filter('pre_site_transient_update_themes','remove_core_updates'); //hide updates for all themes
+        }
+    }
+
+    function hide_user_role_administrator($user_search) {
+        $username = $this ->$current_user -> user_login;
+        $current_user_role = $current_user -> roles[0];
+
+        if ($current_user_role !== 'administrator') {
+            global $wpdb;
+            $user_search->query_where = str_replace(
+            'WHERE 1=1',
+            "WHERE 1=1 AND {$wpdb->users}.user_login != 'admin'",
+            $user_search->query_where
+            );	
         }
     }
 }
