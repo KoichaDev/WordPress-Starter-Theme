@@ -6,8 +6,6 @@ class UserRole {
     }
 
     function init_hooks() {
-        global $current_user;
-
         // None administrator can't see newer general updates from WordPress
         if( !function_exists( 'disable_update_notification_none_admin_user' ) ) {
             add_action( 'init', [ $this, 'disable_update_notification_none_admin_user' ] );
@@ -25,7 +23,11 @@ class UserRole {
 
         // Hide administrator role from dropdown User list
         if( !function_exists( 'hide_admin_user_role_dropdown_list')) {
-            add_action('admin_head',  [$this, 'hide_admin_user_role_dropdown_list'] );
+            add_action('admin_head',  [ $this, 'hide_admin_user_role_dropdown_list'] );
+        }
+
+        if( !function_exists( 'hide_admin_menu_control_update_core')) {
+            add_action( 'admin_menu', [ $this, 'hide_admin_menu_control_update_core' ] );
         }
     }
 
@@ -58,8 +60,8 @@ class UserRole {
     }
 
     function disable_update_notification_none_admin_user() {
-        
-        $admin_role = $this -> $current_user -> roles[0];
+        global $current_user;
+        $admin_role = $current_user -> roles[0];
             
         if( $admin_role !== 'administrator' ) {
             // hide update notifications
@@ -108,6 +110,15 @@ class UserRole {
             </style>';
         } 
     }
+
+    function hide_admin_menu_control_update_core() {
+        global $current_user;
+
+        $admin_role = $current_user -> roles[0];
+        if ($admin_role !== 'administrator') {
+            remove_submenu_page( 'index.php', 'update-core.php' );
+        }
+    }
 }
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -115,7 +126,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 new UserRole();
-
-
-
-
