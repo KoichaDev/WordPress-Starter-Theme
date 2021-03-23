@@ -1,0 +1,1 @@
+<?php // Placeholder for single page-slug as an example. Delete it, since there is no use.  ?>
