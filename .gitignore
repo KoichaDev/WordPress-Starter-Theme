@@ -87,7 +87,9 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 
 # Ignore dependencies and vendors
 /wp-content/plugins/wpc-cli/vendor
-/wp-content/themes/_theme_name/node_modules
+/wp-content/themes/_theme_name/node_modules/
+/wp-content/themes/_theme_name/node_modules/*
+
 
 # Ignore Parcel caching and watching
 /wp-content/themes/_theme_name/.cache

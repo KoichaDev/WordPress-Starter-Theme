@@ -7,10 +7,11 @@
     "preinstall": "npx npm-force-resolutions",
     "debugfalse": "node src/js/dev_modules/wp-debug-false.js ",
     "debugtrue": "node src/js/dev_modules/wp-debug-true.js ",
+    "compress:img": "node compress-images.config.js && node src/js/dev_modules/move-img.js",
     "browsersync": "browser-sync start --proxy 'http://wordpress-starter-theme.local/' --files '**/*.php'",
     "parcel": "npm run debugtrue && parcel watch src/index.js scss/main.scss --public-url ./ --out-dir dist/",
     "dev": "concurrently --kill-others \"npm run browsersync\" \"npm run parcel\"",
-    "prod": "npm run debugfalse && parcel build src/index.js scss/main.scss --public-url ./ --out-dir dist/"
+    "prod": "npm run debugfalse && parcel build src/index.js scss/main.scss --public-url ./ --out-dir dist/ && npm run compress:img"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"
@@ -23,6 +24,7 @@
     "@wordpress/browserslist-config": "^3.0.0",
     "browser-sync": "^2.26.14",
     "browserslist": "^4.16.1",
+    "compress-images": "^1.9.8",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-clean-dist": "0.0.6",
     "parcel-plugin-purgecss": "^3.0.0",
@@ -30,7 +32,8 @@
   },
   "dependencies": {
     "concurrently": "^5.3.0",
-    "core-js-builder": "^3.9.1"
+    "core-js-builder": "^3.9.1",
+    "gifsicle": "^5.2.0"
   },
   "browserslist": [
     "extends @wordpress/browserslist-config"
