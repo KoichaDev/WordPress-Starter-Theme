@@ -86,7 +86,8 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 !/wp-content/plugins/wpc-cli
 
 # Ignore dependencies and vendors
-/wp-content/plugins/wpc-cli/vendor
+/wp-content/mu-plugins/wpc-cli/vendor
+/wp-content/mu-plugins/wpc-cli/vendor/*
 /wp-content/themes/_theme_name/node_modules/
 /wp-content/themes/_theme_name/node_modules/*
 
