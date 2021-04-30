@@ -1,0 +1,23 @@
+name: Deploy to Staging WP Engine server
+on: [workflow_dispatch]
+jobs:
+  wp-engine-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PRIVATE_SSH }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      - name: Checkout to main
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Compile Parcel dev
+        run: |
+          cd wp-content/themes/_theme_name/
+          rm -rf dist node_modules
+          npm i
+          npm run build
+      - name: rsync SSH with Staging WP Engine
+        run: rsync -a wp-content/themes/_theme_name/dist aragondev@aragondev.ssh.wpengine.net:/home/wpe-user/sites/_site_name/wp-content/themes/_theme_name
