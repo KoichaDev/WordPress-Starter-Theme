@@ -13,7 +13,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
-      - name: Compile Parcel dev
+      - name: Copying every local files existing on main branch to Staging Server by using rSync SSH
+        run: rsync -a --include='/wp-content/themes/_theme_name/***' username@remote_host:sites/_site_name/wp-content/themes/_theme_name
+      - name: Compile Webpack to Build from Virtual Machine
         run: |
           cd wp-content/themes/_theme_name/
           rm -rf dist node_modules
