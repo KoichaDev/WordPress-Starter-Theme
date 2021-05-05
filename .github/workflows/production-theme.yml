@@ -1,0 +1,25 @@
+name: Deploy to PRODUCTION WP Engine server
+on: [workflow_dispatch]
+jobs:
+  wp-engine-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PRIVATE_SSH }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      - name: Checkout to main
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Copying every local files existing on main branch to Staging Server by using rSync SSH
+        run: rsync -a --include='/wp-content/themes/_theme_name/***' username@remote_host:sites/_site_name/wp-content/themes/_theme_name
+      - name: Compile Webpack to Build from Virtual Machine
+        run: |
+          cd wp-content/themes/_theme_name/
+          rm -rf dist node_modules .cache
+          npm i
+          npm run build
+      - name: Copying latest compiled build from Virtual machine to Staging WP Engine by using rSync SSH
+        run: rsync -a wp-content/themes/_theme_name/*** username@remote_host:/home/wpe-user/sites/_site_name/wp-content/themes/_theme_name
