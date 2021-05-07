@@ -1,4 +1,4 @@
-name: Deploy to PRODUCTION WP Engine server
+name: Deploy to Staging WP Engine server
 on: [workflow_dispatch]
 jobs:
   wp-engine-prod:
@@ -18,8 +18,8 @@ jobs:
       - name: Compile Webpack to Build from Virtual Machine
         run: |
           cd wp-content/themes/_theme_name/
-          rm -rf dist node_modules
+          rm -rf dist node_modules .cache
           npm i
           npm run build
-      - name: Copying latest compiled build from Virtual machine to Staging WP Engine by using rSync SSH
-        run: rsync -a wp-content/themes/_theme_name/dist username@remote_host:/home/wpe-user/sites/_site_name/wp-content/themes/_theme_name
+      - name: rsync SSH with Staging WP Engine
+        run: rsync -a wp-content/themes/_theme_name/*** aragondev@aragondev.ssh.wpengine.net:/home/wpe-user/sites/_site_name/wp-content/themes/_theme_name
