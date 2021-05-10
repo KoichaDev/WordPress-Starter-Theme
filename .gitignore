@@ -85,6 +85,12 @@ wp-content/mu-plugins/wpe-wp-sign-on-plugin*
 # Don't ignore specific plugin(s)
 !/wp-content/plugins/wpc-cli
 
+# Don't ignore Gutenberg plugin
+!/wp-content/plugins/_theme_name-gutenberg-blocks
+/wp-content/plugins/_theme_name-gutenberg-blocks/.cache
+/wp-content/plugins/_theme_name-gutenberg-blocks/dist
+/wp-content/plugins/_theme_name-gutenberg-blocks/node_modules
+
 # Ignore dependencies and vendors
 /wp-content/mu-plugins/wpc-cli/vendor
 /wp-content/mu-plugins/wpc-cli/vendor/*
