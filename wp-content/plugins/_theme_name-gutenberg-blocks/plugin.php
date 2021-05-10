@@ -12,25 +12,4 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function myfirst_blocks_register() {
-
-    wp_register_script(
-        'myfirst-blocks-editor',
-        plugins_url('blocks/FirstBlock/FirstBlock.js', __FILE__),
-        ['wp-blocks', 'wp-i18n']
-    );
-
-
-    register_block_type(
-        'mytheme-blocks/firstblock',
-        [
-            'editor_script' => 'myfirst-blocks-editor',
-            // 'editor_style',
-            // 'script',
-            // 'style',
-        ]
-    );
-}
-
-
-add_action('init', 'myfirst_blocks_register');
+include_once('inc/blocks/dummy-block/dummy-block-style-and-script.php');

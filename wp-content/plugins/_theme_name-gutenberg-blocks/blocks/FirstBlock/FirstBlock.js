@@ -1,9 +1,9 @@
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
-registerBlockType('myfirst-blocks/firstblock', {
-  title: __('First Block', 'myfirst-blocks'),
-  description: __('Our first block', 'myfirst-blocks'),
+registerBlockType('themename-blocks/firstblock', {
+  title: __('First Block', 'themename-blocks'),
+  description: __('Our first block', 'themename-blocks'),
   category: 'layout',
   edit: () => 'Editor',
   save: () => 'Saved Content',
