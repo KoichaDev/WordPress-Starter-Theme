@@ -5,7 +5,7 @@ function themename_register_block_type($block_name = '', $args = []) {
     wp_register_script(
         'themename-register-block-editor-script',
         plugins_url('../dist/entry.js', __FILE__),
-        ['wp-blocks', 'wp-i18n', 'wp-element']
+        ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components']
     );
 
     wp_register_style(
@@ -15,7 +15,7 @@ function themename_register_block_type($block_name = '', $args = []) {
     );
 
     register_block_type(
-        'mytheme-blocks/' . $block_name,
+        'themename-block/' . $block_name,
         array_merge(
             [
                 // Enquing Script and styles for "back-end"

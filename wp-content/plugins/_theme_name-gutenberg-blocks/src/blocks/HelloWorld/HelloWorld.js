@@ -14,16 +14,16 @@ const heartIcon = (
   </svg>
 );
 
-registerBlockType('themename-block/hello-world-block', {
-  title: __('Hello World', 'themename-blocks'),
-  description: __('Our first block', 'themename-blocks'),
+registerBlockType('themename-block/hello-world', {
+  title: __('Hello World', 'themename-hello-world'),
+  description: __('Our first block', 'themename-hello-world'),
   category: 'layout',
   icon: {
     background: '#f03',
     foreground: '#fff',
     src: heartIcon,
   },
-  keywords: [__('photo', 'themename-block'), __('image', 'themename-block')],
+  keywords: [__('photo', 'themename-block'), __('image', 'themename-hello-world')],
   edit: (props) => {
     const { className } = props;
     return (

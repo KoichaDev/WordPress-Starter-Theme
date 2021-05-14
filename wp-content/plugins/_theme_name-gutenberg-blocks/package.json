@@ -17,6 +17,8 @@
     "@babel/core": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
+    "@wordpress/components": "^14.0.0",
+    "@wordpress/editor": "^10.0.0",
     "parcel-bundler": "^1.12.5",
     "sass": "^1.32.13"
   }
