@@ -2,6 +2,7 @@ const { Component } = wp.element;
 const { RichText } = wp.editor;
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
+
 import './TeamMembers';
 import EditMembers from './Components/EditTeamMembers';
 
@@ -38,5 +39,25 @@ registerBlockType('themename-blocks/team-members', {
   keywords,
   attributes,
   edit: EditMembers,
-  save: ({ className }) => null,
+  save: ({ props, attributes }) => {
+    const { title, info } = attributes;
+    return (
+      <div>
+        {title && (
+          <RichText.Content
+            tagName='h4'
+            className='wp-block-themename-blocks-team-members__title'
+            value={title}
+          />
+        )}
+        {info && (
+          <RichText.Content
+            tagName='p'
+            className='wp-block-themename-blocks-team-members__info'
+            value={info}
+          />
+        )}
+      </div>
+    );
+  },
 });
