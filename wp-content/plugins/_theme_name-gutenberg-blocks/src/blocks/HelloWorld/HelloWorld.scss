@@ -1,7 +1,11 @@
 .wp-block-themename-block-hello-world-block {
-  background: red !important;
-}
+  background: red;
 
-.text-color {
-  color: white;
+  .title-color {
+    color: grey;
+  }
+
+  .text-color {
+    color: white;
+  }
 }

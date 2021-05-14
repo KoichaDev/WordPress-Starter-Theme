@@ -26,7 +26,12 @@ registerBlockType('themename-block/hello-world-block', {
   keywords: [__('photo', 'themename-block'), __('image', 'themename-block')],
   edit: (props) => {
     const { className } = props;
-    return <p className={className}>Hello World</p>;
+    return (
+      <div className={className}>
+        <h1 className='title-color'>Hello World</h1>
+        <p className='text-color'>👋 Lorem Ipsum</p>
+      </div>
+    );
   },
   save: () => <p>Hello World</p>,
 });

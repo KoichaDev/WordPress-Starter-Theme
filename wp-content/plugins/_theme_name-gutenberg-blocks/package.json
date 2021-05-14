@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel watch src/editor.js --public-url ./ --out-dir dist/"
+    "dev": "parcel watch src/entry.js --public-url ./ --out-dir dist/"
   },
   "keywords": [],
   "author": "",

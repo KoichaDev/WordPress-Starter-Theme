@@ -11,6 +11,6 @@ registerBlockType('themename-blocks/dummy-text', {
     src: 'admin-network',
   },
   keywords: [__('photo', 'themename-blocks'), __('image', '__themename-blocks')],
-  edit: () => 'Editor',
-  save: () => 'Saved Content',
+  edit: () => 'Dummy Text',
+  save: () => 'Dummy Text',
 });
