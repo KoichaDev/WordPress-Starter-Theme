@@ -12,4 +12,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-include_once('inc/blocks/dummy-block/dummy-block-style-and-script.php');
+include_once('helpers/register_blocks.php');
+
+function themename_blocks_register() {
+    themename_register_block_type('dummy-text');
+    themename_register_block_type('hello-world');
+}
+
+add_action('init', 'themename_blocks_register');
