@@ -5,7 +5,7 @@ function themename_blocks_register() {
     wp_register_script(
         'themename-blocks-editor',
         plugins_url('../../../blocks/FirstBlock/FirstBlock.js', __FILE__),
-        ['wp-blocks', 'wp-i18n']
+        ['wp-blocks', 'wp-i18n', 'wp-element']
     );
 
 
