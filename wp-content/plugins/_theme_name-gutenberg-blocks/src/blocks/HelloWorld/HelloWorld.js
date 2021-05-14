@@ -33,5 +33,12 @@ registerBlockType('themename-block/hello-world', {
       </div>
     );
   },
-  save: () => <p>Hello World</p>,
+  save: ({ className }) => {
+    return (
+      <div className={className}>
+        <h1 className='title-color'>Hello World</h1>
+        <p className='text-color'>👋 Lorem Ipsum</p>
+      </div>
+    );
+  },
 });

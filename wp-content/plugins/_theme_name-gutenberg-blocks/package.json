@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@wordpress/blocks": "^9.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -17,6 +18,7 @@
     "@babel/core": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
+    "@wordpress/block-editor": "^6.0.0",
     "@wordpress/components": "^14.0.0",
     "@wordpress/editor": "^10.0.0",
     "parcel-bundler": "^1.12.5",

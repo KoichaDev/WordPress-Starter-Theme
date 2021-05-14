@@ -19,5 +19,11 @@ registerBlockType('themename-blocks/dummy-text', {
       </div>
     );
   },
-  save: () => 'Dummy Text',
+  save: ({ className }) => {
+    return (
+      <div className={className}>
+        <p>Dummy Text</p>
+      </div>
+    );
+  },
 });

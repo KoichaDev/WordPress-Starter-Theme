@@ -17,6 +17,7 @@ include_once('helpers/register_blocks.php');
 function themename_blocks_register() {
     themename_register_block_type('dummy-text');
     themename_register_block_type('hello-world');
+    themename_register_block_type('rich-text');
 }
 
 add_action('init', 'themename_blocks_register');
