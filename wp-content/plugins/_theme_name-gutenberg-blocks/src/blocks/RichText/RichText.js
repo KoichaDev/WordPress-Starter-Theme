@@ -37,6 +37,7 @@ registerBlockType('themename-block/rich-text', {
   attributes: {
     content: {
       type: 'string',
+      source: 'html', // This is to avoid saving attribute of unecessarily json object onto the WP database
       selector: 'p',
     },
   },
