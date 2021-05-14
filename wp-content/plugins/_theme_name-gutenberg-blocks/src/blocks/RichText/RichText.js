@@ -37,6 +37,7 @@ registerBlockType('themename-block/rich-text', {
   attributes: {
     content: {
       type: 'string',
+      selector: 'p',
     },
   },
   edit: ({ className, attributes, setAttributes }) => {
@@ -54,7 +55,8 @@ registerBlockType('themename-block/rich-text', {
       />
     );
   },
-  save: ({ className }) => {
-    return '';
+  save: ({ attributes }) => {
+    const { content } = attributes;
+    return <RichText.Content tagName='p' value={content} />;
   },
 });
