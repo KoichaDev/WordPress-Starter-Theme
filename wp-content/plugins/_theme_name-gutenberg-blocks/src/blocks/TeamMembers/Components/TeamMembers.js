@@ -1,11 +1,11 @@
 const { Component } = wp.element;
-const { RichText } = wp.editor;
+const { RichText } = wp.blockEditor;
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
 import './TeamMembers';
-import './Components/GridComponent';
-import EditMembers from './Components/EditTeamMembers';
+import '../GridComponent';
+import EditMembers from './EditTeamMembers';
 
 const icon = {
   background: '#f03',
@@ -36,11 +36,14 @@ registerBlockType('themename-blocks/team-member', {
   title: __('Nested Team members Block', 'themename-blocks'),
   description: __('Example of how nested Team Members works', 'themename-blocks'),
   category: 'layout',
+  // 'parent'-key will make sure that this block can't access the general block on WP gutenberg.
+  // Instead, it serves as a "child"-component
+  parent: ['themename-blocks/team-member'],
   icon,
   keywords,
   attributes,
   edit: EditMembers,
-  save: ({ props, attributes }) => {
+  save: ({ attributes }) => {
     const { title, info } = attributes;
     return (
       <div>

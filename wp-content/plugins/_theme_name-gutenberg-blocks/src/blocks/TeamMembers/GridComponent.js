@@ -1,6 +1,14 @@
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
-const { InnerBlocks } = wp.editor;
+const { InnerBlocks, InspectorControls } = wp.blockEditor;
+const { PanelBody, RangeControl } = wp.components;
+
+const attributes = {
+  columns: {
+    type: 'number',
+    default: 2,
+  },
+};
 
 registerBlockType('themename-blocks/team-members', {
   title: __('Team Members', 'themename-blocks'),
@@ -16,10 +24,22 @@ registerBlockType('themename-blocks/team-members', {
     __('member', 'themename-blocks'),
     __('person', 'themename-blocks'),
   ],
-
-  edit: ({ className }) => {
+  attributes,
+  edit: ({ className, attributes, setAttributes }) => {
+    const { columns } = attributes;
     return (
       <div className={className}>
+        <InspectorControls>
+          <PanelBody>
+            <RangeControl
+              label={__('Columns for Team Members', 'themename-blocks')}
+              value={columns}
+              onChange={(columns) => setAttributes(columns)}
+              min={1}
+              max={6}
+            />
+          </PanelBody>
+        </InspectorControls>
         <InnerBlocks
           //  allowedBlocks can target which gutenberg block you want it specifically can only be used
           allowedBlocks={['themename-blocks/team-member']}
@@ -31,7 +51,7 @@ registerBlockType('themename-blocks/team-members', {
           ]}
           // This can lock by inserting new blocks or re-rodering blocks inside your block
           // https://developer.wordpress.org/block-editor/reference-guides/block-api/block-templates/#locking
-          templateLock='insert'
+          // templateLock='insert'
         />
       </div>
     );

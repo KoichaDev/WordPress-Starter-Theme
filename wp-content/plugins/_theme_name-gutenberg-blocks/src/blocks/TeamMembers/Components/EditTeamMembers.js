@@ -1,5 +1,5 @@
 const { Component } = wp.element;
-const { RichText } = wp.editor;
+const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 import './EditTeamMember.scss';
@@ -19,7 +19,7 @@ class EditTeamMembers extends Component {
           onChange={this.onChangetitle}
           value={title}
           placeholder={__('Member name', 'themename-edit')}
-          formattingControls={[]} // Disable formatting stuff
+          allowedFormats={[]} // Disable formatting stuff
         />
 
         <RichText
@@ -28,7 +28,7 @@ class EditTeamMembers extends Component {
           onChange={this.onChangeInfo}
           value={info}
           placeholder={__('Member info', 'themename-edit')}
-          formattingControls={[]} // Disable formatting stuff
+          allowedFormats={[]} // Disable formatting stuff
         />
       </div>
     );

@@ -2,5 +2,5 @@
 import './blocks/DummyText/DummyText';
 import './blocks/HelloWorld/HelloWorld';
 import './blocks/RichText/RichText';
-import './blocks/TeamMembers/TeamMembers';
-import './blocks/TeamMembers/Components/GridComponent';
+import './blocks/TeamMembers/Components/TeamMembers';
+import './blocks/TeamMembers/GridComponent';
