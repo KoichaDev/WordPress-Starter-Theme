@@ -4,6 +4,7 @@ const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
 import './TeamMembers';
+import './Components/GridComponent';
 import EditMembers from './Components/EditTeamMembers';
 
 const icon = {
@@ -31,7 +32,7 @@ const keywords = [
   __('team', '__themename-blocks'),
 ];
 
-registerBlockType('themename-blocks/team-members', {
+registerBlockType('themename-blocks/team-member', {
   title: __('Nested Team members Block', 'themename-blocks'),
   description: __('Example of how nested Team Members works', 'themename-blocks'),
   category: 'layout',

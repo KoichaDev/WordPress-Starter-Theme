@@ -3,3 +3,4 @@ import './blocks/DummyText/DummyText';
 import './blocks/HelloWorld/HelloWorld';
 import './blocks/RichText/RichText';
 import './blocks/TeamMembers/TeamMembers';
+import './blocks/TeamMembers/Components/GridComponent';
