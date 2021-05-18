@@ -20,8 +20,19 @@ registerBlockType('themename-blocks/team-members', {
   edit: ({ className }) => {
     return (
       <div className={className}>
-        {/* allowedBlocks can target which gutenberg block you want it specifically can only be used */}
-        <InnerBlocks allowedBlocks={['themename-blocks/team-member']} />
+        <InnerBlocks
+          //  allowedBlocks can target which gutenberg block you want it specifically can only be used
+          allowedBlocks={['themename-blocks/team-member']}
+          // template allows you to put array of blocks that will appear automatically when you create something
+          template={[
+            // 2nd param: of the array of object allows you to add attribute automatically. In this case it's title, since the attribute already lives in TeamMembers.js file
+            ['themename-blocks/team-member', { title: 'Dummy Title for team member' }],
+            ['themename-blocks/team-member'],
+          ]}
+          // This can lock by inserting new blocks or re-rodering blocks inside your block
+          // https://developer.wordpress.org/block-editor/reference-guides/block-api/block-templates/#locking
+          templateLock='insert'
+        />
       </div>
     );
   },
