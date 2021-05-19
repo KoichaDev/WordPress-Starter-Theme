@@ -6,6 +6,18 @@ const { Spinner, withNotices } = wp.components;
 
 import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
+  componentDidMount() {
+    const { attributes, setAttributes } = this.props;
+    const { url, id } = attributes;
+
+    if (url && isBlobURL(url) && !id) {
+      setAttributes({
+        url: '',
+        alt: '',
+      });
+    }
+  }
+
   onChangetitle = (title) => this.props.setAttributes({ title });
 
   onChangeInfo = (info) => this.props.setAttributes({ info });
