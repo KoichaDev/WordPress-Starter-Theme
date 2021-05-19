@@ -2,7 +2,7 @@ const { Component } = wp.element;
 const { RichText, MediaPlaceholder } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { isBlobURL } = wp.blob;
-const { Spinner } = wp.components;
+const { Spinner, withNotices } = wp.components;
 
 import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
@@ -20,8 +20,13 @@ class EditTeamMembers extends Component {
       alt: '',
     });
 
+  onErrorUploadHandler = (error) => {
+    const { noticeOperations } = this.props;
+    noticeOperations.createErrorNotice(error);
+  };
+
   render() {
-    const { className, attributes } = this.props;
+    const { className, attributes, noticeUI } = this.props;
     const { title, info, url, alt } = attributes;
     return (
       <div className={className}>
@@ -32,9 +37,10 @@ class EditTeamMembers extends Component {
             icon='format-image'
             onSelect={this.onSelectImageHandler}
             onSelectURL={this.onSelectUrlImageHandler}
-            onError={(error) => console.error(error)}
-            accept='image/*'
+            onError={this.onErrorUploadHandler}
+            // accept='image/*'
             allowedTypes={['image']}
+            notices={noticeUI}
           />
         )}
         <RichText
@@ -59,4 +65,4 @@ class EditTeamMembers extends Component {
   }
 }
 
-export default EditTeamMembers;
+export default withNotices(EditTeamMembers);
