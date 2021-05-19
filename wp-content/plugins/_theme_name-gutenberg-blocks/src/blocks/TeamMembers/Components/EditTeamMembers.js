@@ -12,6 +12,14 @@ class EditTeamMembers extends Component {
 
   onSelectImageHandler = ({ id, url, alt }) => this.props.setAttributes({ id, url, alt });
 
+  onSelectUrlImageHandler = (url) =>
+    this.props.setAttributes({
+      // In case if we choose url, we won't have an id, because it's not an image source from WP library
+      url,
+      id: null,
+      alt: '',
+    });
+
   render() {
     const { className, attributes } = this.props;
     const { title, info, url, alt } = attributes;
@@ -23,7 +31,7 @@ class EditTeamMembers extends Component {
           <MediaPlaceholder
             icon='format-image'
             onSelect={this.onSelectImageHandler}
-            onSelectURL={(url) => console.log(url)}
+            onSelectURL={this.onSelectUrlImageHandler}
             onError={(error) => console.error(error)}
             accept='image/*'
             allowedTypes={['image']}
