@@ -1,5 +1,5 @@
 const { Component } = wp.element;
-const { RichText } = wp.blockEditor;
+const { RichText, MediaPlaceholder } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 import './EditTeamMembers.scss';
@@ -13,6 +13,14 @@ class EditTeamMembers extends Component {
     const { title, info } = attributes;
     return (
       <div className={className}>
+        <MediaPlaceholder
+          icon='format-image'
+          onSelect={(image) => console.log(image)}
+          onSelectURL={(url) => console.log(url)}
+          onError={(error) => console.error(error)}
+          accept='image/*'
+          allowedTypes={['image']}
+        />
         <RichText
           tagName='h4'
           className='wp-block-themename-blocks-team-members__title'
