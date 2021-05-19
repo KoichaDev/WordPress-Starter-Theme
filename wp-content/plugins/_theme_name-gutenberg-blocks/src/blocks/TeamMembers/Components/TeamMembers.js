@@ -2,7 +2,7 @@ const { RichText } = wp.blockEditor;
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
-import './TeamMembers';
+import './TeamMembers.scss';
 import '../GridComponent';
 import EditMembers from './EditTeamMembers';
 

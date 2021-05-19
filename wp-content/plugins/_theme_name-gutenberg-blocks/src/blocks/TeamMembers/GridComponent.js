@@ -2,8 +2,7 @@ const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { PanelBody, RangeControl } = wp.components;
-
-import './GridComponent.scss';
+import './GridComponent.editor.scss';
 
 const attributes = {
   columns: {
