@@ -23,6 +23,23 @@ const attributes = {
     source: 'html',
     selector: 'p',
   },
+  // Object for images
+  id: {
+    type: 'number',
+  },
+  alt: {
+    type: 'string',
+    source: 'attribute',
+    selector: 'img',
+    attributes: 'alt',
+    default: '',
+  },
+  url: {
+    type: 'string',
+    source: 'attribute',
+    selector: 'img',
+    attributes: 'src',
+  },
 };
 
 const keywords = [
