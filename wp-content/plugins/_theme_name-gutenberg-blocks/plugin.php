@@ -19,6 +19,7 @@ function themename_blocks_register() {
     themename_register_block_type('hello-world');
     themename_register_block_type('rich-text');
     themename_register_block_type('team-members');
+    themename_register_block_type('team-member');
 }
 
 add_action('init', 'themename_blocks_register');

@@ -2,7 +2,7 @@ const { Component } = wp.element;
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
 
-import './EditTeamMember.scss';
+import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
   onChangetitle = (title) => this.props.setAttributes({ title });
 

@@ -3,6 +3,8 @@ const { __ } = wp.i18n;
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { PanelBody, RangeControl } = wp.components;
 
+import './GridComponent.scss';
+
 const attributes = {
   columns: {
     type: 'number',

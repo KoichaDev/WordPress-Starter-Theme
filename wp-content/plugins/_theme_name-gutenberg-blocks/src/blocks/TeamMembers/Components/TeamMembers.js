@@ -1,4 +1,3 @@
-const { Component } = wp.element;
 const { RichText } = wp.blockEditor;
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;

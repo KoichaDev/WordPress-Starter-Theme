@@ -1,0 +1,15 @@
+// This is to display the front-end
+.wp-block-themename-blocks-team-members {
+  display: flex;
+  flex-wrap: wrap;
+
+  // Looping throug 1 to 6 columns depends on the column we add on WP block
+  @for $number from 1 through 6 {
+    &.has-#{$number}-columns {
+      .wp-block-themename-blocks-team-member {
+        margin: 10px;
+        width: calc(100% / #{$number} - 20px);
+      }
+    }
+  }
+}
