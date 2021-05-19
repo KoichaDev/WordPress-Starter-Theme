@@ -19,6 +19,9 @@ registerBlockType('themename-blocks/team-members', {
     foreground: '#fff',
     src: 'grid-view',
   },
+  supports: {
+    html: false,
+  },
   category: 'layout',
   keywords: [
     __('team', 'themename-blocks'),

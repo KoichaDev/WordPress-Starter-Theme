@@ -34,6 +34,11 @@ const keywords = [
 registerBlockType('themename-blocks/team-member', {
   title: __('Nested Team members Block', 'themename-blocks'),
   description: __('Example of how nested Team Members works', 'themename-blocks'),
+  // support key-property removes extra feature from the Gutenberg Block as default
+  supports: {
+    reusable: false,
+    html: false,
+  },
   category: 'layout',
   // 'parent'-key will make sure that this block can't access the general block on WP gutenberg.
   // Instead, it serves as a "child"-component
