@@ -65,9 +65,11 @@ registerBlockType('themename-blocks/team-member', {
   attributes,
   edit: EditMembers,
   save: ({ attributes }) => {
-    const { title, info } = attributes;
+    const { title, info, url, alt, id } = attributes;
     return (
       <div>
+        {/* adding the class name of wp-image-${id]} will get your image responsive */}
+        {url && <img src={url} alt={alt} className={id ? `wp-image-${id}` : null} />}
         {title && (
           <RichText.Content
             tagName='h4'
