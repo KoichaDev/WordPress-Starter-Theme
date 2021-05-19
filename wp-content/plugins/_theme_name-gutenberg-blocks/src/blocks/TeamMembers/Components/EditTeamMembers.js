@@ -9,7 +9,7 @@ class EditTeamMembers extends Component {
   onChangeInfo = (info) => this.props.setAttributes({ info });
 
   render() {
-    const { className, attributes, setAttributes } = this.props;
+    const { className, attributes } = this.props;
     const { title, info } = attributes;
     return (
       <div className={className}>

@@ -28,13 +28,13 @@ registerBlockType('themename-blocks/team-members', {
   edit: ({ className, attributes, setAttributes }) => {
     const { columns } = attributes;
     return (
-      <div className={className}>
+      <div className={`${className} has-${columns}-columns`}>
         <InspectorControls>
           <PanelBody>
             <RangeControl
-              label={__('Columns for Team Members', 'themename-blocks')}
+              label='Columns'
               value={columns}
-              onChange={(columns) => setAttributes(columns)}
+              onChange={(columns) => setAttributes({ columns })}
               min={1}
               max={6}
             />
@@ -56,9 +56,10 @@ registerBlockType('themename-blocks/team-members', {
       </div>
     );
   },
-  save: () => {
+  save: ({ attributes }) => {
+    const { columns } = attributes;
     return (
-      <div>
+      <div className={`has-${columns}-columns`}>
         <InnerBlocks.Content />
       </div>
     );
