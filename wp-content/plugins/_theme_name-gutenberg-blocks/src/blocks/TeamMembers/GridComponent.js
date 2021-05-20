@@ -21,6 +21,7 @@ registerBlockType('themename-blocks/team-members', {
   },
   supports: {
     html: false,
+    align: ['wide', 'full'],
   },
   category: 'layout',
   keywords: [

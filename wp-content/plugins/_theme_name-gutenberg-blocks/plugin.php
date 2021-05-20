@@ -12,7 +12,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-include_once('helpers/register_blocks.php');
+include_once('inc/register_block.php');
+include_once('inc/activate_alignment_block.php');
 
 function themename_blocks_register() {
     themename_register_block_type('dummy-text');
