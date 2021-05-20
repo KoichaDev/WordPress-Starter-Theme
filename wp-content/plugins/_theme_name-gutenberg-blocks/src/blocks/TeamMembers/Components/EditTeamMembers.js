@@ -9,7 +9,9 @@ const {
 } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { isBlobURL } = wp.blob;
-const { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl } = wp.components;
+const { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl, SelectControl } =
+  wp.components;
+const { withSelect } = wp.data;
 
 import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
@@ -48,6 +50,29 @@ class EditTeamMembers extends Component {
 
   onAltChangeHandler = (alt) => this.props.setAttributes({ alt });
 
+  onChangeImageSizeHandler = (url) => this.props.setAttributes({ url });
+
+  // Return array of image sizes
+  getImageSizes() {
+    const { image, imageSizes } = this.props;
+    if (!image) return [];
+    let options = [];
+    const imageSizeDetails = image.media_details.sizes;
+
+    for (const key in imageSizeDetails) {
+      const size = imageSizeDetails[key];
+      const imageSize = imageSizes.find((size) => size.slug === key);
+
+      if (imageSize) {
+        options.push({
+          label: imageSize.name,
+          value: size.source_url,
+        });
+      }
+    }
+    return options;
+  }
+
   render() {
     const { className, attributes, noticeUI } = this.props;
     const { title, info, id, url, alt } = attributes;
@@ -66,6 +91,14 @@ class EditTeamMembers extends Component {
                   'onAltChangeHandler'
                 )}
                 placeholder={__('Type something...', 'themename-edit')}
+              />
+            )}
+            {id && (
+              <SelectControl
+                label={__('Image Resize', 'themename-edit')}
+                options={this.getImageSizes()}
+                onChange={this.onChangeImageSizeHandler}
+                value={url}
               />
             )}
           </PanelBody>
@@ -137,5 +170,12 @@ class EditTeamMembers extends Component {
     );
   }
 }
-
-export default withNotices(EditTeamMembers);
+// WordPress allows us to use the withSelect higher order component to fetch this data
+// and pass it to our component as props
+export default withSelect((select, props) => {
+  const { id } = props.attributes;
+  return {
+    image: id ? select('core').getMedia(id) : null,
+    imageSizes: select('core/editor').getEditorSettings().imageSizes,
+  };
+})(withNotices(EditTeamMembers));
