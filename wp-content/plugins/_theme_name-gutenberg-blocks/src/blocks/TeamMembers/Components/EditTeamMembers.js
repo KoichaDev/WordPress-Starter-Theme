@@ -1,8 +1,8 @@
 const { Component } = wp.element;
-const { RichText, MediaPlaceholder } = wp.blockEditor;
+const { RichText, MediaPlaceholder, BlockControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { isBlobURL } = wp.blob;
-const { Spinner, withNotices } = wp.components;
+const { Spinner, withNotices, Toolbar, IconButton } = wp.components;
 
 import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
@@ -37,42 +37,59 @@ class EditTeamMembers extends Component {
     noticeOperations.createErrorNotice(error);
   };
 
+  onRemoveImageHandler = () => this.setAttributes({ id: null, url: '', alt: '' });
+
   render() {
     const { className, attributes, noticeUI } = this.props;
     const { title, info, url, alt } = attributes;
     return (
-      <div className={className}>
-        {url ? (
-          <>{isBlobURL(url) ? <Spinner /> : <img src={url} alt={alt} />}</>
-        ) : (
-          <MediaPlaceholder
-            icon='format-image'
-            onSelect={this.onSelectImageHandler}
-            onSelectURL={this.onSelectUrlImageHandler}
-            onError={this.onErrorUploadHandler}
-            // accept='image/*'
-            allowedTypes={['image']}
-            notices={noticeUI}
+      <>
+        {/* Block Controls to use to remove image  */}
+        <BlockControls>
+          {url && (
+            <Toolbar>
+              <IconButton
+                className='components-icon-button'
+                label={__('Remove Image', 'themename-edit')}
+                icon='trash'
+                onClick={this.onRemoveImageHandler}
+              />
+            </Toolbar>
+          )}
+        </BlockControls>
+        <div className={className}>
+          {url ? (
+            <>{isBlobURL(url) ? <Spinner /> : <img src={url} alt={alt} />}</>
+          ) : (
+            <MediaPlaceholder
+              icon='format-image'
+              onSelect={this.onSelectImageHandler}
+              onSelectURL={this.onSelectUrlImageHandler}
+              onError={this.onErrorUploadHandler}
+              // accept='image/*'
+              allowedTypes={['image']}
+              notices={noticeUI}
+            />
+          )}
+          <RichText
+            tagName='h4'
+            className='wp-block-themename-blocks-team-members__title'
+            onChange={this.onChangetitle}
+            value={title}
+            placeholder={__('Member name', 'themename-edit')}
+            allowedFormats={[]} // Disable formatting stuff
           />
-        )}
-        <RichText
-          tagName='h4'
-          className='wp-block-themename-blocks-team-members__title'
-          onChange={this.onChangetitle}
-          value={title}
-          placeholder={__('Member name', 'themename-edit')}
-          allowedFormats={[]} // Disable formatting stuff
-        />
 
-        <RichText
-          tagName='p'
-          className='wp-block-themename-blocks-team-members__info'
-          onChange={this.onChangeInfo}
-          value={info}
-          placeholder={__('Member info', 'themename-edit')}
-          allowedFormats={[]} // Disable formatting stuff
-        />
-      </div>
+          <RichText
+            tagName='p'
+            className='wp-block-themename-blocks-team-members__info'
+            onChange={this.onChangeInfo}
+            value={info}
+            placeholder={__('Member info', 'themename-edit')}
+            allowedFormats={[]} // Disable formatting stuff
+          />
+        </div>
+      </>
     );
   }
 }
