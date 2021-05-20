@@ -1,8 +1,15 @@
 const { Component } = wp.element;
-const { RichText, MediaPlaceholder, BlockControls, MediaUpload, MediaUploadCheck } = wp.blockEditor;
+const {
+  RichText,
+  MediaPlaceholder,
+  BlockControls,
+  MediaUpload,
+  MediaUploadCheck,
+  InspectorControls,
+} = wp.blockEditor;
 const { __ } = wp.i18n;
 const { isBlobURL } = wp.blob;
-const { Spinner, withNotices, Toolbar, IconButton } = wp.components;
+const { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl } = wp.components;
 
 import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
@@ -39,11 +46,31 @@ class EditTeamMembers extends Component {
 
   onRemoveImageHandler = () => this.props.setAttributes({ id: null, url: '', alt: '' });
 
+  onAltChangeHandler = (alt) => this.props.setAttributes({ alt });
+
   render() {
     const { className, attributes, noticeUI } = this.props;
     const { title, info, id, url, alt } = attributes;
     return (
       <>
+        <InspectorControls>
+          <PanelBody title={__('Image Settings', 'themename-edit')}>
+            {/* Inserting alt text for the image */}
+            {url && !isBlobURL(url) && (
+              <TextareaControl
+                label={__('Alt Text (Alternative Text)', 'themename-edit')}
+                value={alt}
+                onChange={this.onAltChangeHandler}
+                help={__(
+                  "Alternative text description your image to people who can't see it. Add a short description with its key details. Please note this alt image is only applied for this post",
+                  'onAltChangeHandler'
+                )}
+                placeholder={__('Type something...', 'themename-edit')}
+              />
+            )}
+          </PanelBody>
+        </InspectorControls>
+
         {/* Block Controls to use to remove image  */}
         <BlockControls>
           {url && (

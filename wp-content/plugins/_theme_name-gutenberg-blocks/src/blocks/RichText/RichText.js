@@ -43,7 +43,6 @@ registerBlockType('themename-block/rich-text', {
   },
   edit: ({ className, attributes, setAttributes }) => {
     const { content } = attributes;
-
     const onChangeHandler = (content) => setAttributes({ content: content });
 
     return (

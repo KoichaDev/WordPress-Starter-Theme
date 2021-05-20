@@ -31,6 +31,7 @@ registerBlockType('themename-blocks/team-members', {
   attributes,
   edit: ({ className, attributes, setAttributes }) => {
     const { columns } = attributes;
+
     return (
       <div className={`${className} has-${columns}-columns`}>
         <InspectorControls>
