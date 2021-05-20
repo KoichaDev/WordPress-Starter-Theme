@@ -31,14 +31,14 @@ const attributes = {
     type: 'string',
     source: 'attribute',
     selector: 'img',
-    attributes: 'alt',
+    attribute: 'alt',
     default: '',
   },
   url: {
     type: 'string',
     source: 'attribute',
     selector: 'img',
-    attributes: 'src',
+    attribute: 'src',
   },
 };
 
