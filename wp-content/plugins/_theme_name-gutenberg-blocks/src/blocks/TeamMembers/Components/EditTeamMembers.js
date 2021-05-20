@@ -1,5 +1,5 @@
 const { Component } = wp.element;
-const { RichText, MediaPlaceholder, BlockControls } = wp.blockEditor;
+const { RichText, MediaPlaceholder, BlockControls, MediaUpload, MediaUploadCheck } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { isBlobURL } = wp.blob;
 const { Spinner, withNotices, Toolbar, IconButton } = wp.components;
@@ -37,17 +37,34 @@ class EditTeamMembers extends Component {
     noticeOperations.createErrorNotice(error);
   };
 
-  onRemoveImageHandler = () => this.setAttributes({ id: null, url: '', alt: '' });
+  onRemoveImageHandler = () => this.props.setAttributes({ id: null, url: '', alt: '' });
 
   render() {
     const { className, attributes, noticeUI } = this.props;
-    const { title, info, url, alt } = attributes;
+    const { title, info, id, url, alt } = attributes;
     return (
       <>
         {/* Block Controls to use to remove image  */}
         <BlockControls>
           {url && (
             <Toolbar>
+              <MediaUploadCheck>
+                <MediaUpload
+                  onSelect={this.onSelectImageHandler}
+                  allowedTypes={['image']}
+                  value={id}
+                  render={({ open }) => {
+                    return (
+                      <IconButton
+                        className='components-icon-button'
+                        label={__('Edit Image', 'themename-edit')}
+                        icon='edit'
+                        onClick={open}
+                      />
+                    );
+                  }}
+                />
+              </MediaUploadCheck>
               <IconButton
                 className='components-icon-button'
                 label={__('Remove Image', 'themename-edit')}
