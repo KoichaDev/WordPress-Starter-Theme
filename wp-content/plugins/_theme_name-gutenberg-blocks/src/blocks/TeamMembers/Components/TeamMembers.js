@@ -97,7 +97,7 @@ registerBlockType('themename-blocks/team-member', {
             <ul>
               {social.map((socialItem, index) => {
                 return (
-                  <li key={index}>
+                  <li key={index} data-icon={socialItem.icon}>
                     <a href={socialItem.link} target='_blank' rel='noopener noreferr'>
                       <Dashicon icon={socialItem.icon} />
                     </a>
