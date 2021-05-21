@@ -112,6 +112,20 @@ class EditTeamMembers extends Component {
     setAttributes({ social: newSocial });
   };
 
+  onClickRemoveLinkHandler = (e) => {
+    e.preventDefault();
+    const { attributes, setAttributes } = this.props;
+    const { social } = attributes;
+    const { selectedSocialLink } = this.state;
+
+    setAttributes({
+      social: [...social.slice(0, selectedSocialLink), ...social.slice(selectedSocialLink + 1)],
+    });
+    this.setState({
+      selectedSocialLink: null,
+    });
+  };
+
   render() {
     const { className, attributes, noticeUI, isSelected } = this.props;
     const { title, info, id, url, alt, social } = attributes;
@@ -242,7 +256,9 @@ class EditTeamMembers extends Component {
                 value={social[this.state.selectedSocialLink].link}
                 onChange={(url) => this.onChangeUpdateSocialIconHandler('link', url)}
               />
-              <a className='wp-block-themename-blocks-team-members__social-icon-remove-link-form'>
+              <a
+                className='wp-block-themename-blocks-team-members__social-icon-remove-link-form'
+                onClick={this.onClickRemoveLinkHandler}>
                 {__('Remove Link', 'themename-edit')}
               </a>
             </div>
