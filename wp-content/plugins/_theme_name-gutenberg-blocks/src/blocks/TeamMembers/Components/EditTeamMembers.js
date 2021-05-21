@@ -24,6 +24,10 @@ const { withSelect } = wp.data;
 
 import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
+  state = {
+    selectedSocialLink: null,
+  };
+
   componentDidMount() {
     const { attributes, setAttributes } = this.props;
     const { url, id } = attributes;
@@ -33,6 +37,12 @@ class EditTeamMembers extends Component {
         url: '',
         alt: '',
       });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isSelected && !this.props.isSelected) {
+      this.setState({ selectedSocialLink: null });
     }
   }
 
@@ -81,6 +91,15 @@ class EditTeamMembers extends Component {
     }
     return options;
   }
+
+  onClickAddSocialIconHandler = () => {
+    const { attributes, setAttributes } = this.props;
+    const { social } = attributes;
+    setAttributes({
+      social: [...social, { icon: 'wordpress', link: '' }],
+    });
+    this.setState({ selectedSocialLink: social.length });
+  };
 
   render() {
     const { className, attributes, noticeUI, isSelected } = this.props;
@@ -178,8 +197,10 @@ class EditTeamMembers extends Component {
             <ul>
               {social.map((socialItem, index) => {
                 return (
-                  <li key={index}>
-                    {' '}
+                  <li
+                    key={index}
+                    className={this.state.selectedSocialLink === index ? 'is-selected' : null}
+                    onClick={() => this.setState({ selectedSocialLink: index })}>
                     <Dashicon icon={socialItem.icon} size={16} />
                   </li>
                 );
@@ -188,7 +209,9 @@ class EditTeamMembers extends Component {
               {isSelected && (
                 <li className='wp-block-themename-blocks-team-members__new-social-icon'>
                   <Tooltip text={__('Add Social Icon', 'themename-edit')}>
-                    <button className='wp-block-themename-blocks-team-members__add-social-icon'>
+                    <button
+                      className='wp-block-themename-blocks-team-members__add-social-icon'
+                      onClick={this.onClickAddSocialIconHandler}>
                       <Dashicon icon='plus' size={14} />
                     </button>
                   </Tooltip>
