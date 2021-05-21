@@ -47,6 +47,19 @@ const attributes = {
       { link: 'https://facebook.com', icon: 'facebook-alt' },
       { link: 'https://twitter.com', icon: 'twitter' },
     ],
+    source: 'query',
+    selector: '.wp-block-themename-blocks-team-members__social-icon ul li',
+    query: {
+      icon: {
+        source: 'attribute',
+        attribute: 'data-icon',
+      },
+      link: {
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'href',
+      },
+    },
   },
 };
 

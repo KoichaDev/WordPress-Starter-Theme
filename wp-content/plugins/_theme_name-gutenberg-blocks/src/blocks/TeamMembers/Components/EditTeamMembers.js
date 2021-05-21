@@ -6,6 +6,7 @@ const {
   MediaUpload,
   MediaUploadCheck,
   InspectorControls,
+  URLInput,
 } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { isBlobURL } = wp.blob;
@@ -19,6 +20,7 @@ const {
   SelectControl,
   Dashicon,
   Tooltip,
+  TextControl,
 } = wp.components;
 const { withSelect } = wp.data;
 
@@ -219,6 +221,15 @@ class EditTeamMembers extends Component {
               )}
             </ul>
           </div>
+          {this.state.selectedSocialLink !== null && (
+            <div className='wp-block-themename-blocks-team-members__social-icon-link-form'>
+              <TextControl label={__('Icon', 'themename-edit')} />
+              <URLInput label={__('URL', 'themename-edit')} />
+              <a className='wp-block-themename-blocks-team-members__social-icon-remove-link-form'>
+                {__('Remove Link', 'themename-edit')}
+              </a>
+            </div>
+          )}
         </div>
       </>
     );
