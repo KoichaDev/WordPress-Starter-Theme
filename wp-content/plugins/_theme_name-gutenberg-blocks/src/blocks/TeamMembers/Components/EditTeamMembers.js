@@ -103,6 +103,15 @@ class EditTeamMembers extends Component {
     this.setState({ selectedSocialLink: social.length });
   };
 
+  onChangeUpdateSocialIconHandler = (type, value) => {
+    const { attributes, setAttributes } = this.props;
+    const { social } = attributes;
+    const { selectedSocialLink } = this.state;
+    let newSocial = [...social];
+    newSocial[selectedSocialLink][type] = value;
+    setAttributes({ social: newSocial });
+  };
+
   render() {
     const { className, attributes, noticeUI, isSelected } = this.props;
     const { title, info, id, url, alt, social } = attributes;
@@ -223,8 +232,16 @@ class EditTeamMembers extends Component {
           </div>
           {this.state.selectedSocialLink !== null && (
             <div className='wp-block-themename-blocks-team-members__social-icon-link-form'>
-              <TextControl label={__('Icon', 'themename-edit')} />
-              <URLInput label={__('URL', 'themename-edit')} />
+              <TextControl
+                label={__('Icon', 'themename-edit')}
+                value={social[this.state.selectedSocialLink].icon}
+                onChange={(icon) => this.onChangeUpdateSocialIconHandler('icon', icon)}
+              />
+              <URLInput
+                label={__('URL', 'themename-edit')}
+                value={social[this.state.selectedSocialLink].link}
+                onChange={(url) => this.onChangeUpdateSocialIconHandler('link', url)}
+              />
               <a className='wp-block-themename-blocks-team-members__social-icon-remove-link-form'>
                 {__('Remove Link', 'themename-edit')}
               </a>
