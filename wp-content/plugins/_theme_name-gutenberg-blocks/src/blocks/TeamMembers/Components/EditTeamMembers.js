@@ -9,8 +9,17 @@ const {
 } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { isBlobURL } = wp.blob;
-const { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl, SelectControl } =
-  wp.components;
+const {
+  Spinner,
+  withNotices,
+  Toolbar,
+  IconButton,
+  PanelBody,
+  TextareaControl,
+  SelectControl,
+  Dashicon,
+  Tooltip,
+} = wp.components;
 const { withSelect } = wp.data;
 
 import './EditTeamMembers.scss';
@@ -74,8 +83,8 @@ class EditTeamMembers extends Component {
   }
 
   render() {
-    const { className, attributes, noticeUI } = this.props;
-    const { title, info, id, url, alt } = attributes;
+    const { className, attributes, noticeUI, isSelected } = this.props;
+    const { title, info, id, url, alt, social } = attributes;
     return (
       <>
         <InspectorControls>
@@ -165,6 +174,28 @@ class EditTeamMembers extends Component {
             placeholder={__('Member info', 'themename-edit')}
             allowedFormats={[]} // Disable formatting stuff
           />
+          <div className='wp-block-themename-blocks-team-members__social-icon'>
+            <ul>
+              {social.map((socialItem, index) => {
+                return (
+                  <li key={index}>
+                    {' '}
+                    <Dashicon icon={socialItem.icon} size={16} />
+                  </li>
+                );
+              })}
+
+              {isSelected && (
+                <li className='wp-block-themename-blocks-team-members__new-social-icon'>
+                  <Tooltip text={__('Add Social Icon', 'themename-edit')}>
+                    <button className='wp-block-themename-blocks-team-members__add-social-icon'>
+                      <Dashicon icon='plus' size={14} />
+                    </button>
+                  </Tooltip>
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
       </>
     );
