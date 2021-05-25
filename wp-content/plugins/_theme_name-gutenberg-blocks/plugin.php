@@ -41,5 +41,22 @@ function themename_blocks_register() {
 add_action('init', 'themename_blocks_register');
 
 function themename_blocks_render_latests_posts_block($attributes) {
-    return '<p>ijioasdjioasjod</p>';
+    $args = [
+        'posts_per_page' => $attributes['numberOfPosts']
+    ];
+    $query = new WP_Query($args);
+    $posts = '';
+
+    if ($query->have_posts()) {
+        $posts .= '<ul class="wp-blocks-mytheme-blocks-latest-posts">';
+        while ($query->have_posts()) {
+            $query->the_post();
+            $posts .= '<li><a href="' . esc_url(get_the_permalink()) . '">' . get_the_title() . '</a></li>';
+        }
+        $posts .= '</ul>';
+        wp_reset_postdata();
+        return $posts;
+    } else {
+        return '<div>' . __('No WP Posts found', 'themename-blocks') . ' </div>';
+    }
 }
