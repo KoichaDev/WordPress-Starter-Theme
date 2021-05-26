@@ -23,6 +23,8 @@ const {
   TextControl,
 } = wp.components;
 const { withSelect } = wp.data;
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+const arrayMove = require('array-move');
 
 import './EditTeamMembers.scss';
 class EditTeamMembers extends Component {
@@ -126,9 +128,48 @@ class EditTeamMembers extends Component {
     });
   };
 
+  onSortSocialIcon = (oldIndex, newIndex) => {
+    const { attributes, setAttributes } = this.props;
+    const { social } = attributes;
+    let newSocialIconOnDrag = arrayMove(social, oldIndex, newIndex);
+    setAttributes({ social: newSocialIconOnDrag });
+    this.setState({ selectedSocialLink: null });
+  };
+
   render() {
     const { className, attributes, noticeUI, isSelected } = this.props;
     const { title, info, id, url, alt, social } = attributes;
+
+    const SortableSocialMediaIcon = SortableContainer(() => {
+      return (
+        <ul>
+          {social.map((socialItem, index) => {
+            let SortableItem = SortableElement(() => {
+              return (
+                <li
+                  key={index}
+                  className={this.state.selectedSocialLink === index ? 'is-selected' : null}
+                  onClick={() => this.setState({ selectedSocialLink: index })}>
+                  <Dashicon icon={socialItem.icon} size={16} />
+                </li>
+              );
+            });
+            return <SortableItem key={index} index={index} />;
+          })}
+          {isSelected && (
+            <li className='wp-block-themename-blocks-team-members__new-social-icon'>
+              <Tooltip text={__('Add Social Icon', 'themename-edit')}>
+                <button
+                  className='wp-block-themename-blocks-team-members__add-social-icon'
+                  onClick={this.onClickAddSocialIconHandler}>
+                  <Dashicon icon='plus' size={14} />
+                </button>
+              </Tooltip>
+            </li>
+          )}
+        </ul>
+      );
+    });
     return (
       <>
         <InspectorControls>
@@ -219,30 +260,12 @@ class EditTeamMembers extends Component {
             allowedFormats={[]} // Disable formatting stuff
           />
           <div className='wp-block-themename-blocks-team-members__social-icon'>
-            <ul>
-              {social.map((socialItem, index) => {
-                return (
-                  <li
-                    key={index}
-                    className={this.state.selectedSocialLink === index ? 'is-selected' : null}
-                    onClick={() => this.setState({ selectedSocialLink: index })}>
-                    <Dashicon icon={socialItem.icon} size={16} />
-                  </li>
-                );
-              })}
-
-              {isSelected && (
-                <li className='wp-block-themename-blocks-team-members__new-social-icon'>
-                  <Tooltip text={__('Add Social Icon', 'themename-edit')}>
-                    <button
-                      className='wp-block-themename-blocks-team-members__add-social-icon'
-                      onClick={this.onClickAddSocialIconHandler}>
-                      <Dashicon icon='plus' size={14} />
-                    </button>
-                  </Tooltip>
-                </li>
-              )}
-            </ul>
+            <SortableSocialMediaIcon
+              axis='x'
+              helperClass={'social_dragging'}
+              distance={10} // Dragging wil not start until we move our mouse by 10 px. This will give us time to click on the social icon button
+              onSortEnd={(oldIndex, newIndex) => this.onSortSocialIcon(oldIndex, newIndex)}
+            />
           </div>
           {this.state.selectedSocialLink !== null && (
             <div className='wp-block-themename-blocks-team-members__social-icon-link-form'>

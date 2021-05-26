@@ -11,7 +11,7 @@ registerBlockType('themename-block/latest-posts', {
     foreground: '#fff',
     src: 'admin-post',
   },
-  keywords: [__('photo', 'themename-block'), __('image', 'themename-hello-world')],
+  keywords: [__('post', 'themename-block'), __('posts', 'themename-block')],
   edit: LatestPostsEdit,
   save: () => {
     // This is important, since we returning dynamic block and not static HTML
