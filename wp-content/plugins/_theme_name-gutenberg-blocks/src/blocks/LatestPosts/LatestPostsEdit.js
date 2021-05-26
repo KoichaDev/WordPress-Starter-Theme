@@ -1,5 +1,6 @@
 const { Component } = wp.element;
 const { __ } = wp.i18n;
+import { decodeEntities } from '@wordpress/html-entities';
 const { withSelect } = wp.data; // Using the WP Redux
 
 class LatestPostsEdit extends Component {
@@ -13,7 +14,7 @@ class LatestPostsEdit extends Component {
             {posts.map((post) => (
               <li key={post.id}>
                 <a href={post.link} target='_blank' rel='noopener noreferrer'>
-                  {post.title.rendered}
+                  {decodeEntities(post.title.rendered)}
                 </a>
               </li>
             ))}

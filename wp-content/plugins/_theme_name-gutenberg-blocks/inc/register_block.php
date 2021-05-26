@@ -5,7 +5,7 @@ function themename_register_block_type($block_name = '', $args = []) {
     wp_register_script(
         'themename-register-block-editor-script',
         plugins_url('../dist/entry.js', __FILE__),
-        ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components', 'wp-blob', 'wp-data']
+        ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components', 'wp-blob', 'wp-data', 'wp-html-entities']
     );
 
     wp_register_style(
