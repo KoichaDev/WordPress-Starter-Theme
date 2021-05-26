@@ -1,14 +1,30 @@
+const { RangeControl, PanelBody } = wp.components;
+const { InspectorControls } = wp.blockEditor;
 const { Component } = wp.element;
 const { __ } = wp.i18n;
 import { decodeEntities } from '@wordpress/html-entities';
 const { withSelect } = wp.data; // Using the WP Redux
 
 class LatestPostsEdit extends Component {
+  onChangeNumberOfPostsHandler = (numberOfPosts) => this.props.setAttributes({ numberOfPosts });
+
   render() {
-    const { posts, className } = this.props;
-    console.log(this.props);
+    const { posts, className, attributes } = this.props;
+    const { numberOfPosts } = attributes;
+
     return (
       <>
+        <InspectorControls>
+          <PanelBody title={__('Posts Settings', 'themename-blocks')}>
+            <RangeControl
+              label={__('Number of Posts', 'themename-blocks')}
+              value={numberOfPosts}
+              onChange={this.onChangeNumberOfPostsHandler}
+              min={1}
+              max={10}
+            />
+          </PanelBody>
+        </InspectorControls>
         {posts && posts.length > 0 ? (
           <ul className={className}>
             {posts.map((post) => (
